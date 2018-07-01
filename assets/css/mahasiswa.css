@@ -1,0 +1,19 @@
+.nav-scroller{
+	margin: -16px;
+	padding-left: 30px;
+	width: 1380px;
+}
+
+.row{
+	margin-top: 15px;
+	margin-bottom: -15px;
+}
+
+.input-group{
+	margin-top: 15px;
+	margin-bottom: -15px;
+}
+
+body{
+	max-width: 1380px;
+}
