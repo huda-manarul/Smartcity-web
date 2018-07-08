@@ -21,7 +21,7 @@
               <td><?php echo $u->komentar; ?></td>
               <td>
                 <center>
-                  <a href="<?php echo base_url().'dashboard/tambahberita' ?>">tulis</a> || <a href="<?php echo base_url()."dashboard/editberita/".$u->id_berita; ?>">edit</a> || <a href="<?php echo base_url()."dashboard/hapusberita/".$u->id_berita; ?>">hapus</a>
+                   <a href="<?php echo base_url()."dashboard/hapuskomentar/".$u->no; ?>">hapus</a>
                 </center>
               </td>
             </tr>

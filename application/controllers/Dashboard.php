@@ -3,9 +3,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Dashboard extends CI_Controller {
 
-	public function __construct()
-	{
+	public function __construct(){
 		parent::__construct();
+		$this->load->library('upload');
 		$this->load->library('pagination');
 		$this->load->model('admin');
 		$this->load->view('layout/admin_header');			
@@ -68,35 +68,13 @@ class Dashboard extends CI_Controller {
 		$this->load->view('admin/datakomentar',$data);
 	}
 
-	public function jawabpertanyaan($no){
+	
+	public function hapuskomentar($no){
 		$where = array(
 			'no' => $no
 		);
-		$data['user'] = $this->admin->Editdatainfo($where,'tbl_komentar')->result();
-		$this->load->view('admin/jawab',$data);
-	}
-
-	public function jawab(){
-		$tanya = $this->input->post('pertanyaan');
-		$jawab = $this->input->post('jawaban');
-
-		$where = array(
-			'pertanyaan' => $tanya
-		);
-
-		$data = array(
-			'jawaban' => $jawab
-		);
-		$this->admin->jawab($where,$data,'tbl_komentar');
-		redirect(base_url().'dashboard/datapertanyaan','refresh');
-	}
-
-	public function hapuspertanyaan($no){
-		$where = array(
-			'no' => $no
-		);
-		$this->admin->hapus_data($where,'tbl_diskusi');
-		redirect(base_url().'dashboard/datapertanyaan','refresh');
+		$this->admin->Deletedata($where,'tbl_komentar');
+		redirect(base_url().'dashboard/datakomentar','refresh');
 	}
 
 	
@@ -107,13 +85,24 @@ class Dashboard extends CI_Controller {
 
 
 	public function prosestamabahinformasi(){
+
+		$config['upload_path'] = './assets/images/'; 
+		$config['allowed_types'] = 'jpg|png|jpeg|bmp'; 
+		$config['encrypt_name'] = FALSE; 
+
+		$this->upload->initialize($config);
+		$this->upload->do_upload('gambar');
+		$gambar = $this->upload->data();
+		$gambar_berita=$gambar['file_name'];
+
 		$judul = $this->input->post('judul');
 		$berita = $this->input->post('berita');
 		$data = array(
 			'judul_berita' => $judul,
+			'gambar_berita' => $gambar_berita,
 			'isi_berita' => $berita
 		);
-		$this->admin->Insertdatainfo($data,'tbl_informasi');
+		$this->admin->Insertdata($data,'tbl_informasi');
 		redirect(base_url().'dashboard/databerita','refresh');
 	}
 
@@ -121,7 +110,7 @@ class Dashboard extends CI_Controller {
 		$where = array(
 			'id_berita' => $no
 		);
-		$this->admin->hapus_data($where,'tbl_informasi');
+		$this->admin->Deletedata($where,'tbl_informasi');
 		redirect(base_url().'dashboard/databerita','refresh');
 	}
 
@@ -129,11 +118,19 @@ class Dashboard extends CI_Controller {
 		$where = array(
 			'id_berita' => $no
 		);
-		$data['user'] = $this->admin->Editdatainfo($where,'tbl_informasi')->result();
-		$this->load->view('admin/editinfo',$data);
+		$data['user'] = $this->admin->Editdata($where,'tbl_informasi')->result();
+		$this->load->view('admin/editberita',$data);
 	}
 
-	public function proseseditinformasi(){
+	public function proseseditberita(){
+		$config['upload_path'] = './assets/images/'; 
+		$config['allowed_types'] = 'jpg|png|jpeg|bmp'; 
+		$config['encrypt_name'] = FALSE; 
+
+		$this->upload->initialize($config);
+		$this->upload->do_upload('gambar');
+		$gambar = $this->upload->data();
+		$gambar_berita=$gambar['file_name'];
 		
 		$id = $this->input->post('id');
 		$judul = $this->input->post('judul');
@@ -143,14 +140,212 @@ class Dashboard extends CI_Controller {
 			'id_berita' => $id
 		);
 
-		$data = array(
-			'judul_berita' => $judul,
-			'isi_berita' => $isi
-		);
-		$this->admin->jawab($where,$data,'tbl_informasi');
+		if ($gambar_berita=='') {
+			$data = array(
+				'judul_berita' => $judul,
+				'isi_berita' => $isi
+			);
+		}
+		else{
+			$data = array(
+				'judul_berita' => $judul,
+				'isi_berita' => $isi,
+				'gambar_berita' => $gambar_berita
+			);
+		}
+
+		$this->admin->Updatedata($where,$data,'tbl_informasi');
 		redirect(base_url().'dashboard/databerita','refresh');
 	}
 
+	public function jadwal(){
+		$data['user'] = $this->admin->Selectdata('tbl_jadwal')->result();
+		$this->load->view('admin/jadwal',$data);	
+	}
+
+	public function hapusjadwal($no){
+		$where = array(
+			'no' => $no
+		);
+		$this->admin->Deletedata($where,'tbl_jadwal');
+		redirect(base_url().'dashboard/jadwal','refresh');
+	}
+
+	public function tambahjadwal(){
+		$data['wilayah'] = $this->admin->Selectdata('tbl_wilayah')->result();
+		$data['mobil'] = $this->admin->Selectdata('tbl_mobil')->result();
+		$this->load->view('admin/tambahjadwal',$data);	
+	}
+
+	public function prosestambahjadwal(){
+		$wilayah = $this->input->post('wilayah');
+		$mobil = $this->input->post('mobil');
+		$senin = $this->input->post('senin');
+		$selasa = $this->input->post('selasa');
+		$rabu = $this->input->post('rabu');
+		$kamis = $this->input->post('kamis');
+		$jumat = $this->input->post('jumat');
+
+		$data = array(
+			'id_wilayah' => $wilayah,
+			'id_mobil' => $mobil,
+			'senin' => $senin,
+			'selasa' => $selasa,
+			'rabu' => $rabu,
+			'kamis' => $kamis,
+			'jumat' => $jumat
+		);
+
+		$this->admin->Insertdata($data,'tbl_jadwal');
+		redirect(base_url().'dashboard/jadwal','refresh');
+	}
+
+	public function editjadwal($no){
+		$where = array(
+			'no' => $no
+		);
+		$data['wilayah'] = $this->admin->Selectdata('tbl_wilayah')->result();
+		$data['mobil'] = $this->admin->Selectdata('tbl_mobil')->result();
+		$data['user'] = $this->admin->Editdata($where,'tbl_jadwal')->result();
+		$this->load->view('admin/editjadwal',$data);
+	}
+
+	public function proseseditjadwal(){
+		$id = $this->input->post('no');
+		$wilayah = $this->input->post('wilayah');
+		$mobil = $this->input->post('mobil');
+		$senin = $this->input->post('senin');
+		$selasa = $this->input->post('selasa');
+		$rabu = $this->input->post('rabu');
+		$kamis = $this->input->post('kamis');
+		$jumat = $this->input->post('jumat');
+
+		$where = array(
+			'no' => $id
+		);
+
+		$data = array(
+			'id_wilayah' => $wilayah,
+			'id_mobil' => $mobil,
+			'senin' => $senin,
+			'selasa' => $selasa,
+			'rabu' => $rabu,
+			'kamis' => $kamis,
+			'jumat' => $jumat
+		);
+		$this->admin->Updatedata($where,$data,'tbl_jadwal');
+		redirect(base_url().'dashboard/jadwal','refresh');
+
+	}
+
+	public function mobil(){
+		$data['user'] = $this->admin->Selectdata('tbl_mobil')->result();
+		$data['petugas'] = $this->admin->Selectdata('tbl_petugas')->result();
+		$this->load->view('admin/mobil',$data);
+		
+	}
+
+	public function tambahmobil(){
+		$nopol = $this->input->post('nopol');
+		$petugas = $this->input->post('petugas');
+		$data = array(
+			'nopol' => $nopol,
+			'id_petugas' => $petugas
+		);
+		$this->admin->Insertdata($data,'tbl_mobil');
+		redirect(base_url().'dashboard/mobil','refresh');
+	}
+
+	public function hapusmobil($no){
+		$where = array(
+			'id_mobil' => $no
+		);
+		$this->admin->Deletedata($where,'tbl_mobil');
+		redirect(base_url().'dashboard/mobil','refresh');
+	}
+
+	public function editmobil($no){
+		$where = array(
+			'id_mobil' => $no
+		);
+		$data['petugas'] = $this->admin->Selectdata('tbl_petugas')->result();
+		$data['user'] = $this->admin->Editdata($where,'tbl_mobil')->result();
+		$this->load->view('admin/editmobil',$data);
+	}
+
+	public function updatemobil(){
+		$id = $this->input->post('id');
+		$nopol = $this->input->post('nopol');
+		$petugas = $this->input->post('petugas');
+
+		$where = array(
+			'id_mobil' => $id
+		);
+
+		$data = array(
+			'nopol' => $nopol,
+			'id_petugas' => $petugas			
+		);
+		$this->admin->Updatedata($where,$data,'tbl_mobil');
+		redirect(base_url().'dashboard/mobil','refresh');
+
+	}
+//kene woi
+	public function wilayah(){
+		$data['user'] = $this->admin->Selectdata('tbl_wilayah')->result();
+		$this->load->view('admin/wilayah',$data);	
+	}
+
+	public function hapuswilayah($no){
+		$where = array(
+			'id_wilayah' => $no
+		);
+		$this->admin->Deletedata($where,'tbl_wilayah');
+		redirect(base_url().'dashboard/wilayah','refresh');
+	}
+
+	public function tambahwilayah(){
+		$this->load->view('admin/tambahwilayah');	
+	}
+
+	public function prosestambahwilayah(){
+		$nama = $this->input->post('nama');
+		$isi = $this->input->post('isi');
+
+		$data = array(
+			'nama' => $nama,
+			'isi' => $isi
+		);
+
+		$this->admin->Insertdata($data,'tbl_wilayah');
+		redirect(base_url().'dashboard/wilayah','refresh');
+	}
+
+	public function editwilayah($no){
+		$where = array(
+			'id_wilayah' => $no
+		);
+		$data['user'] = $this->admin->Editdata($where,'tbl_wilayah')->result();
+		$this->load->view('admin/editwilayah',$data);
+	}
+
+	public function proseseditwilayah(){
+		$id = $this->input->post('no');
+		$nama = $this->input->post('nama');
+		$isi = $this->input->post('isi');
+
+		$where = array(
+			'id_wilayah' => $id
+		);
+
+		$data = array(
+			'nama' => $nama,
+			'isi' => $isi
+		);
+		$this->admin->Updatedata($where,$data,'tbl_wilayah');
+		redirect(base_url().'dashboard/wilayah','refresh');
+
+	}
 	
 
 }

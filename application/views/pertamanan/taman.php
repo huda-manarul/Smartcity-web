@@ -5,6 +5,7 @@
   <h1 class="my-4"><?php echo $u->nama_taman ?>
     <!-- <small>Secondary Text</small> -->
   </h1>
+  <p class="text-muted"><i class="glyphicon glyphicon-time"></i><?php echo $u->alamat ?></p>
   <!-- Portfolio Item Row -->
   <div class="row">
     <div class="col-md-8">
@@ -12,15 +13,8 @@
       <!-- <img class="img-fluid" src="http://placehold.it/750x500" alt=""> -->
     </div>
     <div class="col-md-4">
-      <h3 class="my-3">Project Description</h3>
+      <!-- <h3 class="my-3">Project Description</h3> -->
       <p class="lead"><?php echo $u->detail_taman; ?></p>
-      <h3 class="my-3">Project Details</h3>
-      <ul>
-        <li>Lorem Ipsum</li>
-        <li>Dolor Sit Amet</li>
-        <li>Consectetur</li>
-        <li>Adipiscing Elit</li>
-      </ul>
     </div>
   </div>
   <!-- /.row -->

@@ -113,8 +113,24 @@ class Pertamanan extends CI_Controller {
 	}
 
 	public function laporan(){
-		$this->load->view('pertamanan/laporan');	
+		$data['user'] = $this->admin->Selectdata('tbl_taman')->result();
+		$this->load->view('pertamanan/laporan',$data);	
 
+	}
+
+	public function tambahlaporan(){
+		$jenis = $this->input->post('jenis');
+		$judul = $this->input->post('judul');
+		$pengaduan = $this->input->post('pengaduan');
+		$tanggal = date('Y-m-d');
+		$data = array(
+			'id_taman' => $jenis,
+			'obj_lap' => $judul,
+			'tanggal' => $tanggal,
+			'detail_lapporan' => $pengaduan
+		);
+		$this->admin->Insertdata($data,'tbl_laporan');
+		redirect(base_url().'pertamanan/laporan','refresh');
 	}
 
 	public function logout()

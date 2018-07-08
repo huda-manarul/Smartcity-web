@@ -11,19 +11,19 @@
       <a class="nav-link" href="<?php echo base_url().'dashboard/datakomentar' ?>">Komentar</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="#">jadwal</a>
+      <a class="nav-link" href="<?php echo base_url().'dashboard/jadwal' ?>">jadwal</a>
     </li>
   </ul>
 
   <ul class="nav nav-pills flex-column">
     <li class="nav-item">
-      <a class="nav-link" href="#">wilayah</a>
+      <a class="nav-link" href="<?php echo base_url().'dashboard/wilayah' ?>">wilayah</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="#">mobil</a>
+      <a class="nav-link" href="<?php echo base_url().'dashboard/mobil' ?>">mobil</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="#">petugas</a>
+      <a class="nav-link" href="<?php echo base_url().'dashboard/petugas' ?>">petugas</a>
     </li>
     <li class="nav-item">
       <a class="nav-link" href="#">masukan</a>
