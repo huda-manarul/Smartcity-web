@@ -24,5 +24,5 @@
       <!-- <input type="text" class="form-control" name="alamat" hidden=""> -->
     <button type="submit" class="btn btn-primary">Submit</button>
   </form>
-  <?php echo $this->session->userdata("id_user"); ?>
+  <!-- <?php echo $this->session->userdata("id_user"); ?> -->
 </div>

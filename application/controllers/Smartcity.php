@@ -12,11 +12,11 @@ class Smartcity extends CI_Controller {
 	public function index(){
 		if($this->admin->logged_id()){
 			// redirect('login');
-			$this->load->view('Smartcity/main');
+			$this->load->view('Smartcity/content');
 		}
 		else{
 			// $this->load->view('layout/header');
-			$this->load->view('Smartcity/main');
+			$this->load->view('Smartcity/content');
 		}
 	}
 

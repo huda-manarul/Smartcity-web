@@ -19,7 +19,8 @@ class Dashboard extends CI_Controller {
 			$this->load->view('admin/dashboard');			
 
 		}else{
-			redirect('smartcity');
+			// redirect('smartcity');
+			$this->load->view('admin/dashboard');			
 		}
 	}
 
@@ -561,5 +562,81 @@ class Dashboard extends CI_Controller {
 		redirect(base_url().'dashboard/databerita','refresh');
 	}
 
+	public function dataizin(){
+		$data['angkutan'] = $this->admin->Selectdata('tbl_angkutan')->result();
+		$data['taman'] = $this->admin->Selectdata('tbl_ruang')->result();
+		$this->load->view('admin/dataizin',$data);
+	}
 
+	public function izinsetuju($no){
+		$where = array(
+			'id' => $no
+		);
+
+		$data['user'] = $this->admin->Editdata($where,'tbl_angkutan')->result();
+		$this->load->view('admin/persetujuan',$data);
+	}
+
+	public function izintaman($no){
+		$where = array(
+			'id' => $no
+		);
+
+		$data['user'] = $this->admin->Editdata($where,'tbl_ruang')->result();
+		$this->load->view('admin/persetujuan1',$data);
+	}
+
+	public function ok(){		
+		$id = $this->input->post('id');
+		$judul = $this->input->post('jenis');
+		$isi = $this->input->post('persetujuan');
+
+		$where = array(
+			'id' => $id
+		);
+
+		
+		$data = array(
+			'status' => $judul,
+			'pesan' => $isi
+		);
+		
+		$this->admin->Updatedata($where,$data,'tbl_angkutan');
+		redirect(base_url().'dashboard/dataizin','refresh');
+
+	}
+
+	public function ok1(){		
+		$id = $this->input->post('id');
+		$judul = $this->input->post('jenis');
+		$isi = $this->input->post('persetujuan');
+
+		$where = array(
+			'id' => $id
+		);
+
+		
+		$data = array(
+			'status' => $judul,
+			'ket' => $isi
+		);
+		
+		$this->admin->Updatedata($where,$data,'tbl_ruang');
+		redirect(base_url().'dashboard/dataizin','refresh');
+
+	}
+
+
+	public function laporan(){
+		$data['user'] = $this->admin->getlaporan()->result();
+		$this->load->view('admin/datalaporan',$data);
+	}
+
+	public function hapuslaporan($no){
+		$where = array(
+			'id_laporan' => $no
+		);
+		$this->admin->Deletedata($where,'tbl_laporan');
+		redirect(base_url().'dashboard/laporan','refresh');
+	}
 }

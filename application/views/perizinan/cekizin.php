@@ -1,5 +1,6 @@
 <div class="container">
-	table class="table table-hover">
+	<h3>Izin angkutan</h3><br>
+	<table class="table table-hover">
         <thead>
           <tr>
             <th>nik</th>

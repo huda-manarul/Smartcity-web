@@ -77,6 +77,7 @@
 							<div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
 								<a class="dropdown-item" href="<?php echo base_url().'smartcity/pengaduan' ?>">pengaduan</a>
 								<a class="dropdown-item" href="<?php echo base_url().'smartcity/daftar' ?>"">daftar</a>
+								<a class="dropdown-item" href="<?php echo base_url().'smartcity/logout' ?>"">keluar</a>
 							</div>
 						</li>
 					</ul>

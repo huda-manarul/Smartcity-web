@@ -7,7 +7,7 @@ class Pertamanan extends CI_Controller {
 	{
 		parent::__construct();
         //load model admin
-		$this->load->library('upload');
+		// $this->load->library('upload');
 		$this->load->library('pagination');
 		$this->load->model('admin');
 		$this->load->helper('url');

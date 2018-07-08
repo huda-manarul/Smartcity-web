@@ -41,6 +41,13 @@ class Admin extends CI_Model
         return $this->db->get();
     }
 
+    public function getlaporan(){
+        $this->db->select('*');
+        $this->db->from('tbl_laporan');
+        $this->db->join('tbl_taman', 'tbl_taman.id_taman = tbl_laporan.id_taman');
+        return $this->db->get();
+    }
+
     //ambil data berita
     public function Editdata($where,$table){       
         return $this->db->get_where($table,$where);

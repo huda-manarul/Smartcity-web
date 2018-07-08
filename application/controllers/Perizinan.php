@@ -57,7 +57,7 @@ class perizinan extends CI_Controller {
 	}
 
 	public function cek(){
-		$this->load->view("perizinan/ruang");			
+		$this->load->view("perizinan/cek");			
 		
 	}
 

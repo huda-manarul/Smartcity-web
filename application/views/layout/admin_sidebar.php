@@ -38,7 +38,10 @@
       <a class="nav-link" href="<?php echo base_url().'dashboard/acara' ?>">acara</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="#">Another nav item</a>
+      <a class="nav-link" href="<?php echo base_url().'dashboard/laporan' ?>">laporan</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="<?php echo base_url().'dashboard/dataizin' ?>">dataizin</a>
     </li>
   </ul>
 </nav>

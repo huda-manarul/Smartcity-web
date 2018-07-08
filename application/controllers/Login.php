@@ -12,8 +12,10 @@ class Login extends CI_Controller {
 
 	public function loginadmin(){
 		if($this->admin->logged_id()){
-			$this->session->sess_destroy();
-			redirect('login/loginadmin');
+			// $this->session->sess_destroy();
+			// redirect('login/loginadmin');
+			redirect('dashboard');
+
 		}
 		else{
 			$this->form_validation->set_rules('username', 'Username', 'required');
@@ -56,12 +58,12 @@ class Login extends CI_Controller {
 
 					$data['error'] = '<div class="alert alert-danger" style="margin-top: 3px">
 					<div class="header"><b><i class="fa fa-exclamation-circle"></i> ERROR</b> username atau password salah!</div></div>';
-					$this->load->view('login', $data);
+					$this->load->view('admin/loginadmin', $data);
 				}
 
 			}else{
 
-				$this->load->view('login');
+				$this->load->view('admin/loginadmin');
 			}
 
 		}

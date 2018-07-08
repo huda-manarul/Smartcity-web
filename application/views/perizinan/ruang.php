@@ -1,5 +1,5 @@
 <div class="container">
-  <form action="<?php echo base_url().'smartcity/daftarruang' ?>" method="post" >
+  <form action="<?php echo base_url().'perizinan/daftarruang' ?>" method="post" >
     <div class="form-group">
       <label for="nik">NIK</label>
       <input type="text" class="form-control" name="nik">
