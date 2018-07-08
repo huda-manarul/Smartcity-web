@@ -1,4 +1,4 @@
-<div class="container">
+<!-- <div class="container">
   <div class="row">
     <div class="col-sm-4 my-4">
       <div class="card">
@@ -36,5 +36,18 @@
         </div>
       </div>
     </div>
+
+    <div class="col-sm-4 my-4">
+      <div class="card">
+        <img class="card-img-top" src="<?php echo base_url().'assets/images/A11_2015_09279-SK.png' ?>" alt="">
+        <div class="card-body">
+          <h4 class="card-title">Perizinan</h4>
+          <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente esse necessitatibus neque.</p>
+        </div>
+        <div class="card-footer">
+          <a href="#" class="btn btn-primary">Baca Lebih Lanjut</a>
+        </div>
+      </div>
+    </div>
   </div>
-</div>
+</div> -->

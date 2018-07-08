@@ -14,57 +14,22 @@
 					<th class="bg-blue default">Rabu</th>
 					<th class="bg-blue">Kamis</th>
 					<th class="bg-purple">Jumat</th>
+					<th class="bg-blue default">mobil</th>
 				</tr>
 			</thead>
 			<tbody>
+				<?php 
+      foreach($user as $u){ ?>
 				<tr>
-					<td>Wilayah 1</td>
-					<td>plastik</td>
-					<td>kaca</td>
-					<td>besi</td>
-					<td>organik</td>
-					<td>elektronik</td>
+					<td><?php echo $u->id_wilayah ?></td>
+					<td><?php echo $u->senin ?></td>
+					<td><?php echo $u->selasa ?></td>
+					<td><?php echo $u->rabu ?></td>
+					<td><?php echo $u->kamis ?></td>
+					<td><?php echo $u->jumat ?></td>
+					<td><?php echo $u->id_mobil ?></td>
 				</tr>
-				<tr>
-					<td>Wilayah 1</td>
-					<td>plastik</td>
-					<td>kaca</td>
-					<td>besi</td>
-					<td>organik</td>
-					<td>elektronik</td>
-				</tr>
-				<tr>
-					<td>Wilayah 1</td>
-					<td>plastik</td>
-					<td>kaca</td>
-					<td>besi</td>
-					<td>organik</td>
-					<td>elektronik</td>
-				</tr>
-				<tr>
-					<td>Wilayah 1</td>
-					<td>plastik</td>
-					<td>kaca</td>
-					<td>besi</td>
-					<td>organik</td>
-					<td>elektronik</td>
-				</tr>
-				<tr>
-					<td>Wilayah 1</td>
-					<td>plastik</td>
-					<td>kaca</td>
-					<td>besi</td>
-					<td>organik</td>
-					<td>elektronik</td>
-				</tr>
-				<tr>
-					<td>Wilayah 1</td>
-					<td>plastik</td>
-					<td>kaca</td>
-					<td>besi</td>
-					<td>organik</td>
-					<td>elektronik</td>
-				</tr>
+				<?php } ?>
 			</tbody>
 		</table>
 	</article>

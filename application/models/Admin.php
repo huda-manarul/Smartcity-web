@@ -34,6 +34,13 @@ class Admin extends CI_Model
        return $this->db->get($table);
     }
 
+    public function getkomen(){
+        $this->db->select('*');
+        $this->db->from('tbl_informasi');
+        $this->db->join('tbl_komentar', 'tbl_komentar.id_berita = tbl_informasi.id_berita');
+        return $this->db->get();
+    }
+
     //ambil data berita
     public function Editdata($where,$table){       
         return $this->db->get_where($table,$where);

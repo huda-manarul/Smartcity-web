@@ -7,13 +7,11 @@ class Pengelolaansampah extends CI_Controller {
 	public function __construct()
 	{
 		parent::__construct();
-        //load model admin
 		$this->load->library('upload');
 		$this->load->library('pagination');
 		$this->load->model('admin');
 		$this->load->helper('url');
-		$this->load->view("layout/main_header");			
-		$this->load->view("sampah/header");			
+		$this->load->view("layout/main_header");					
 	}
 
 	public function index()
@@ -66,7 +64,7 @@ class Pengelolaansampah extends CI_Controller {
 			'id_berita' => $no
 		);
 		$data['user'] = $this->admin->Editdata($where,'tbl_informasi')->result();
-		$data['komen'] = $this->admin->Editdata($where,'tbl_diskusi')->result();
+		$data['komen'] = $this->admin->Editdata($where,'tbl_komentar')->result();
 		$this->load->view('sampah/detailberita',$data);
 	}
 
@@ -77,12 +75,13 @@ class Pengelolaansampah extends CI_Controller {
 			'id_berita' => $id,
 			'komentar' => $pertanyaan
 		);
-		$this->admin->Insertdata($data,'tbl_diskusi');
+		$this->admin->Insertdata($data,'tbl_komentar');
 		redirect(base_url().'pengelolaansampah/viewberita/'.$id,'refresh');
 	}
 
 	public function jadwal(){
-		$this->load->view('sampah/jadwal');
+		$data['user'] = $this->admin->Selectdata('tbl_jadwal')->result();
+		$this->load->view('sampah/jadwal',$data);
 	}
 	public function pemetaan(){
 		// $this->load->view('sampah/pemetaan');
