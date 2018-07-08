@@ -26,16 +26,16 @@
       <a class="nav-link" href="<?php echo base_url().'dashboard/petugas' ?>">petugas</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="#">masukan</a>
+      <a class="nav-link" href="<?php echo base_url().'dashboard/pengaduan' ?>">pengaduan</a>
     </li>
   </ul>
 
   <ul class="nav nav-pills flex-column">
     <li class="nav-item">
-      <a class="nav-link" href="#">Nav item again</a>
+      <a class="nav-link" href="<?php echo base_url().'dashboard/taman' ?>">taman</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="#">One more nav</a>
+      <a class="nav-link" href="<?php echo base_url().'dashboard/acara' ?>">acara</a>
     </li>
     <li class="nav-item">
       <a class="nav-link" href="#">Another nav item</a>

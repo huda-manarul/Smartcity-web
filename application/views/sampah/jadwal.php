@@ -21,13 +21,13 @@
 				<?php 
       foreach($user as $u){ ?>
 				<tr>
-					<td><?php echo $u->id_wilayah ?></td>
+					<td><?php echo "wilayah ".$u->id_wilayah ?></td>
 					<td><?php echo $u->senin ?></td>
 					<td><?php echo $u->selasa ?></td>
 					<td><?php echo $u->rabu ?></td>
 					<td><?php echo $u->kamis ?></td>
 					<td><?php echo $u->jumat ?></td>
-					<td><?php echo $u->id_mobil ?></td>
+					<td><?php echo "mobil ".$u->id_mobil ?></td>
 				</tr>
 				<?php } ?>
 			</tbody>

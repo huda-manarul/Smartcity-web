@@ -18,8 +18,9 @@ class Pertamanan extends CI_Controller {
 	{
 		if($this->admin->logged_id())
 		{	
-			echo "string";
-			$this->load->view("Pertamanan/listtaman");			
+			// echo "string";
+			// $this->load->view("Pertamanan/listtaman");		
+			redirect('pertamanan/listtaman');
 
 		}else{
 			redirect('pertamanan/listtaman');

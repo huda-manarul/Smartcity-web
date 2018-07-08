@@ -63,16 +63,30 @@
 								Perizinan
 							</a>
 							<div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-								<a class="dropdown-item" href="#">Pengelolaan Sampah</a>
-								<a class="dropdown-item" href="#">Pemetaan Lokasi</a>
-								<a class="dropdown-item" href="#">Jadwal Pengambilan</a>
+								<a class="dropdown-item" href="<?php echo base_url().'perizinan/taman' ?>">Penggunaan ruang terbuka hijau</a>
+								<a class="dropdown-item" href="<?php echo base_url().'perizinan/angkutan' ?>">izin angkutan</a>
+								<a class="dropdown-item" href="<?php echo base_url().'perizinan/cek' ?>">cek perizinan</a>
+							</div>
+						</li>
+					</ul>
+					<ul class="navbar-nav">
+						<li class="nav-item dropdown">
+							<a class="nav-link dropdown-toggle" href="" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+								lainya
+							</a>
+							<div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+								<a class="dropdown-item" href="<?php echo base_url().'smartcity/pengaduan' ?>">pengaduan</a>
+								<a class="dropdown-item" href="<?php echo base_url().'smartcity/daftar' ?>"">daftar</a>
 							</div>
 						</li>
 					</ul>
 				</div>
 			</nav>
-			<nav>
-			<a class="p-2 text-dark" href="<?php echo base_url().'smartcity/pengaduan' ?>">pengaduan</a>
+			<!-- <nav>
+				<a class="p-2 text-dark" href="<?php echo base_url().'smartcity/pengaduan' ?>">pengaduan</a>
+			</nav> -->
+			<nav class="my-2 my-md-0 mr-md-3">
+				<a class="p-2 text-dark" href="#"><?php echo $this->session->userdata("user_nama"); ?></a>
 			</nav>
 			<a class="btn btn-outline-primary" href="<?php echo base_url().'login' ?>">login</a>
 		</div>

@@ -71,8 +71,12 @@ class Pengelolaansampah extends CI_Controller {
 	public function komentar(){
 		$pertanyaan = $this->input->post('pertanyaan');
 		$id = $this->input->post('id');
+		$user = $this->input->post('user');
+		$iduser = $this->input->post('iduser');
 		$data = array(
+			'id_user' => $iduser,
 			'id_berita' => $id,
+			'nama' => $user,
 			'komentar' => $pertanyaan
 		);
 		$this->admin->Insertdata($data,'tbl_komentar');

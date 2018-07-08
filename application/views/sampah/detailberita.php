@@ -27,6 +27,9 @@
               <?php 
             }
             ?>
+
+            <input type="text" name="user" value="<?php echo $this->session->userdata("user_nama"); ?>" hidden="">
+            <input type="text" name="iduser" value="<?php echo $this->session->userdata("id_user"); ?>" hidden="">
             <input type="text" class="form-control" placeholder="Tulis Komentar Anda" name="pertanyaan" >
             <div class="input-group-append">
               <button class="btn btn-outline-primary" type="submit">Kirim</button>
@@ -43,7 +46,7 @@
               </a>
             </div>
             <div class="media-body">
-              <h4 class="media-heading">user</h4>
+              <h4 class="media-heading"><?php echo $u->nama?></h4>
               <p><?php echo $u->komentar?></p>
             </div>
           </div>

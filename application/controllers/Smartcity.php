@@ -11,7 +11,8 @@ class Smartcity extends CI_Controller {
 
 	public function index(){
 		if($this->admin->logged_id()){
-			redirect('login');
+			// redirect('login');
+			$this->load->view('Smartcity/main');
 		}
 		else{
 			// $this->load->view('layout/header');
@@ -29,6 +30,10 @@ class Smartcity extends CI_Controller {
 		$this->load->view('Smartcity/pengaduan');
 	}
 
+	public function daftar(){
+		$this->load->view('Smartcity/daftar');
+	}
+
 	public function tambahpengaduan(){
 		$jenis = $this->input->post('jenis');
 		$judul = $this->input->post('judul');
@@ -42,6 +47,26 @@ class Smartcity extends CI_Controller {
 		);
 		$this->admin->Insertdata($data,'tbl_pengaduan');
 		redirect(base_url().'smartcity/pengaduan','refresh');
+	}
+
+	public function prosesdaftar(){
+		$nama = $this->input->post('nama');
+		$nik = $this->input->post('nik');
+		$alamat = $this->input->post('alamat');
+		$hp = $this->input->post('hp');
+		$user = $this->input->post('user');
+		$password = $this->input->post('password');	
+		$data = array(
+			'nik' => $jenis,
+			'nama_user' => $judul,
+			'username' => $tanggal,
+			'password' => $tanggal,
+			'level' => 1,
+			'hp' => $tanggal,
+			'alamat' => $pengaduan
+		);
+		$this->admin->Insertdata($data,'tbl_user');
+		redirect(base_url().'smartcity','refresh');
 	}
 	
 }

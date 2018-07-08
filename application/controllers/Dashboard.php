@@ -346,6 +346,220 @@ class Dashboard extends CI_Controller {
 		redirect(base_url().'dashboard/wilayah','refresh');
 
 	}
-	
+
+	public function petugas(){
+		$data['user'] = $this->admin->Selectdata('tbl_petugas')->result();
+		$this->load->view('admin/pegawai',$data);
+		
+	}
+
+	public function hapuspetugas($no){
+		$where = array(
+			'id_petugas' => $no
+		);
+		$this->admin->Deletedata($where,'tbl_petugas');
+		redirect(base_url().'dashboard/wilayah','refresh');
+	}
+
+	public function tambahpetugas(){
+		$nama = $this->input->post('nama');
+		$nik = $this->input->post('nik');
+		$alamat = $this->input->post('alamat');
+		$hp = $this->input->post('hp');
+		$data = array(
+			'nama' => $nama,
+			'alamat' => $alamat,
+			'no_hp' => $hp,
+			'nik' => $nik
+		);
+
+		$this->admin->Insertdata($data,'tbl_petugas');
+		redirect(base_url().'dashboard/petugas','refresh');
+	}
+
+	public function pengaduan(){
+		$data['user'] = $this->admin->Selectdata('tbl_pengaduan')->result();
+		$this->load->view('admin/pengaduan',$data);
+		
+	}
+
+	////////
+
+	public function taman(){
+		$data['user'] = $this->admin->Selectdata('tbl_taman')->result();
+		$this->load->view('admin/datataman',$data);
+	}
+
+	public function tambahtaman(){
+		$this->load->view('admin/taman');
+	}
+
+	public function prosestambahtaman(){
+
+		$config['upload_path'] = './assets/images/'; 
+		$config['allowed_types'] = 'jpg|png|jpeg|bmp'; 
+		$config['encrypt_name'] = FALSE; 
+
+		$this->upload->initialize($config);
+		$this->upload->do_upload('gambar');
+		$gambar = $this->upload->data();
+		$gambar_berita=$gambar['file_name'];
+
+		$judul = $this->input->post('judul');
+		$berita = $this->input->post('berita');
+		$alamat = $this->input->post('alamat');
+		$data = array(
+			'nama_taman' => $judul,
+			'gambar_taman' => $gambar_berita,
+			'alamat' => $alamat,
+			'detail_taman' => $berita
+		);
+		$this->admin->Insertdata($data,'tbl_informasi');
+		redirect(base_url().'dashboard/databerita','refresh');
+	}
+
+	public function hapustaman($no){
+		$where = array(
+			'id_taman' => $no
+		);
+		$this->admin->Deletedata($where,'tbl_taman');
+		redirect(base_url().'dashboard/datataman','refresh');
+	}
+
+	public function edittaman($no){
+		$where = array(
+			'id_taman' => $no
+		);
+		$data['user'] = $this->admin->Editdata($where,'tbl_taman')->result();
+		$this->load->view('admin/edittaman',$data);
+	}
+
+	public function prosesedittaman(){
+		$config['upload_path'] = './assets/images/'; 
+		$config['allowed_types'] = 'jpg|png|jpeg|bmp'; 
+		$config['encrypt_name'] = FALSE; 
+
+		$this->upload->initialize($config);
+		$this->upload->do_upload('gambar');
+		$gambar = $this->upload->data();
+		$gambar_berita=$gambar['file_name'];
+		
+		$id = $this->input->post('id');
+		$judul = $this->input->post('judul');
+		$isi = $this->input->post('berita');
+		$alamat = $this->input->post('alamat');
+
+		$where = array(
+			'id_taman' => $id
+		);
+
+		if ($gambar_berita=='') {
+			$data = array(
+				'nama_taman' => $judul,
+				// 'gambar_taman' => $gambar_berita,
+				'alamat' => $alamat,
+				'detail_taman' => $berita
+			);
+		}
+		else{
+			$data = array(
+				'nama_taman' => $judul,
+				'gambar_taman' => $gambar_berita,
+				'alamat' => $alamat,
+				'detail_taman' => $berita
+			);
+		}
+
+		$this->admin->Updatedata($where,$data,'tbl_taman');
+		redirect(base_url().'dashboard/databerita','refresh');
+	}
+
+	public function acara(){
+		$data['user'] = $this->admin->Selectdata('tbl_acara')->result();
+		$this->load->view('admin/dataacara',$data);
+	}
+
+	public function tambahacara(){
+		$data['taman'] = $this->admin->Selectdata('tbl_taman')->result();
+		$this->load->view('admin/tambahacara',$data);
+	}
+
+
+	public function prosestamabahacara(){
+
+		$config['upload_path'] = './assets/images/'; 
+		$config['allowed_types'] = 'jpg|png|jpeg|bmp'; 
+		$config['encrypt_name'] = FALSE; 
+
+		$this->upload->initialize($config);
+		$this->upload->do_upload('gambar');
+		$gambar = $this->upload->data();
+		$gambar_berita=$gambar['file_name'];
+
+		$judul = $this->input->post('judul');
+		$berita = $this->input->post('berita');
+		$taman = $this->input->post('taman');
+		$data = array(
+			'nama_acara' => $judul,
+			'gambar_acara' => $gambar_berita,
+			'id_taman' => $taman,
+			'detail_acara' => $berita
+		);
+		$this->admin->Insertdata($data,'tbl_acara');
+		redirect(base_url().'dashboard/acara','refresh');
+	}
+
+	public function hapusacara($no){
+		$where = array(
+			'id_acara' => $no
+		);
+		$this->admin->Deletedata($where,'tbl_acara');
+		redirect(base_url().'dashboard/databerita','refresh');
+	}
+
+	public function editacara($no){
+		$where = array(
+			'id_berita' => $no
+		);
+		$data['user'] = $this->admin->Editdata($where,'tbl_informasi')->result();
+		$this->load->view('admin/editberita',$data);
+	}
+
+	public function proseseditacara(){
+		$config['upload_path'] = './assets/images/'; 
+		$config['allowed_types'] = 'jpg|png|jpeg|bmp'; 
+		$config['encrypt_name'] = FALSE; 
+
+		$this->upload->initialize($config);
+		$this->upload->do_upload('gambar');
+		$gambar = $this->upload->data();
+		$gambar_berita=$gambar['file_name'];
+		
+		$id = $this->input->post('id');
+		$judul = $this->input->post('judul');
+		$isi = $this->input->post('berita');
+
+		$where = array(
+			'id_berita' => $id
+		);
+
+		if ($gambar_berita=='') {
+			$data = array(
+				'judul_berita' => $judul,
+				'isi_berita' => $isi
+			);
+		}
+		else{
+			$data = array(
+				'judul_berita' => $judul,
+				'isi_berita' => $isi,
+				'gambar_berita' => $gambar_berita
+			);
+		}
+
+		$this->admin->Updatedata($where,$data,'tbl_informasi');
+		redirect(base_url().'dashboard/databerita','refresh');
+	}
+
 
 }
